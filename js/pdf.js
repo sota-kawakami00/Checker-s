@@ -59,6 +59,9 @@ const CheckerPDF = (() => {
   }
 
   async function generatePdfBlob(result) {
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+      throw new Error("PDFライブラリ(jsPDF)を読み込めませんでした。ネットワーク接続を確認してください。");
+    }
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ unit: "pt", format: "a4" });
     const pageW = doc.internal.pageSize.getWidth();

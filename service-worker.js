@@ -11,6 +11,7 @@ const ASSETS = [
   "./js/ai.js",
   "./js/pdf.js",
   "./js/app.js",
+  "./vendor/jspdf.umd.min.js",
   "./assets/icons/icon.svg"
 ];
 
