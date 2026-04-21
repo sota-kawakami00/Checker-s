@@ -204,10 +204,8 @@ const App = (() => {
     const grid = $("#shot-grid");
     grid.innerHTML = CheckerData.CAPTURE_SHOTS.map((s, i) => `
       <div class="cell">
-        <svg viewBox="0 0 40 40" fill="none" stroke="#4cc9f0" stroke-width="2">
-          <rect x="6" y="10" width="28" height="22" rx="4"/>
-          <circle cx="12" cy="32" r="3" fill="#4cc9f0"/>
-          <circle cx="28" cy="32" r="3" fill="#4cc9f0"/>
+        <svg viewBox="0 0 40 40" fill="none" stroke="#4cc9f0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          ${s.icon || `<rect x="6" y="10" width="28" height="22" rx="4"/>`}
         </svg>
         <div>${i+1}.${s.label}</div>
       </div>
