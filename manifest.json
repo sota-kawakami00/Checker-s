@@ -1,0 +1,30 @@
+{
+  "name": "Checker-S - AI中古車査定",
+  "short_name": "Checker-S",
+  "description": "スマホで撮影するだけでAIが傷・凹み・修復歴を判定し中古車を査定",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070a16",
+  "theme_color": "#0a1128",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
