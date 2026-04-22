@@ -105,11 +105,81 @@ const App = (() => {
     try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]"); }
     catch { return []; }
   }
+  // 旧バージョンで captures (フルサイズdataURL×8枚) ごと localStorage
+  // に保存されていたデータをスリム化する。起動時に一度だけ実行。
+  function migrateHistory() {
+    try {
+      const raw = localStorage.getItem(HISTORY_KEY);
+      if (!raw) return;
+      const list = JSON.parse(raw);
+      if (!Array.isArray(list) || !list.length) return;
+      let changed = false;
+      for (const it of list) {
+        if (it && "captures" in it) { delete it.captures; changed = true; }
+      }
+      if (changed) {
+        try { localStorage.setItem(HISTORY_KEY, JSON.stringify(list)); }
+        catch { localStorage.removeItem(HISTORY_KEY); }
+      }
+    } catch {
+      try { localStorage.removeItem(HISTORY_KEY); } catch {}
+    }
+  }
   function saveHistoryItem(item) {
+    // 履歴には撮影画像本体(captures)は入れない。dataURLは1枚あたり数百KB
+    // あるためlocalStorage (~5MB) をすぐ使い切ってしまう。サムネイルのみ保存。
+    const slim = {
+      vehicle:   item.vehicle,
+      final:     item.final,
+      low:       item.low,
+      high:      item.high,
+      damages:   item.damages,
+      breakdown: item.breakdown,
+      thumb:     item.thumb,          // すでに縮小済みサムネイル
+      createdAt: item.createdAt,
+      customer:  item.customer
+    };
     const list = loadHistory();
-    list.unshift(item);
+    list.unshift(slim);
     if (list.length > 20) list.length = 20;
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(list));
+    // 容量超過時は古い履歴から削除して再試行
+    while (list.length > 0) {
+      try {
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(list));
+        return;
+      } catch (err) {
+        if (!isQuotaError(err)) throw err;
+        list.pop();                    // 最古を1つ削ってリトライ
+      }
+    }
+    // 空にしても入らない場合は諦めてキーを消す
+    try { localStorage.removeItem(HISTORY_KEY); } catch {}
+  }
+  function isQuotaError(e) {
+    return e && (
+      e.name === "QuotaExceededError" ||
+      e.name === "NS_ERROR_DOM_QUOTA_REACHED" ||
+      e.code === 22 || e.code === 1014 ||
+      String(e.message || "").toLowerCase().includes("quota")
+    );
+  }
+  // dataURL を縮小してサムネイル用の小さな dataURL を返す
+  function makeThumbnail(dataUrl, maxSize = 160, quality = 0.72) {
+    return new Promise((resolve) => {
+      if (!dataUrl) return resolve(null);
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+        const w = Math.max(1, Math.round(img.width  * scale));
+        const h = Math.max(1, Math.round(img.height * scale));
+        const c = document.createElement("canvas");
+        c.width = w; c.height = h;
+        c.getContext("2d").drawImage(img, 0, 0, w, h);
+        resolve(c.toDataURL("image/jpeg", quality));
+      };
+      img.onerror = () => resolve(null);
+      img.src = dataUrl;
+    });
   }
   function renderHistory() {
     const list = loadHistory();
@@ -381,33 +451,30 @@ const App = (() => {
     try {
       const damages = await CheckerAI.detectAll(state.captures);
       const calc    = CheckerAI.calculateValuation({ vehicle: state.vehicle, damages });
+      // 履歴用の小さなサムネイル（失敗しても致命ではない）
+      const thumb   = await makeThumbnail(state.captures[0]?.dataUrl).catch(() => null);
       const result  = {
         vehicle: state.vehicle,
         damages,
         ...calc,
-        captures: state.captures,
+        captures: state.captures,   // メモリ上のみ保持（PDF生成に使用）
         createdAt: Date.now(),
         customer: state.user?.name,
-        thumb: state.captures[0]?.dataUrl || null
+        thumb
       };
       // 合計確認用に少し待機してリアリティ演出
       await wait(1600);
       state.lastResult = result;
       renderResult(result);
-      saveHistoryItem({
-        vehicle: result.vehicle,
-        final:   result.final,
-        low:     result.low,
-        high:    result.high,
-        damages: result.damages,
-        breakdown: result.breakdown,
-        captures: result.captures,
-        thumb:   result.thumb,
-        createdAt: result.createdAt,
-        customer: result.customer
-      });
+      // 履歴保存は解析成功とは独立。失敗しても結果画面は出す。
+      try {
+        saveHistoryItem(result);
+      } catch (storeErr) {
+        console.warn("履歴の保存に失敗:", storeErr);
+      }
       showView("view-result");
     } catch (e) {
+      console.error("analyze failed:", e);
       alert("解析に失敗しました: " + (e.message || e));
     } finally {
       clearInterval(timer);
@@ -486,6 +553,7 @@ const App = (() => {
   // ---------- 起動 ----------
   async function boot() {
     await CheckerAuth.ensureDemoUser();
+    migrateHistory();
 
     initAuthView();
     initHome();
