@@ -22,8 +22,14 @@ if [ -z "$UDID" ]; then
   echo "シミュレータ '$SIM_NAME' が見つかりません" >&2
   exit 1
 fi
+# 対象以外の起動中デバイスを落とし、目的のウィンドウだけが前面に出るようにする
+for booted in $(xcrun simctl list devices | grep Booted | grep -oE '[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}'); do
+  if [ "$booted" != "$UDID" ]; then
+    xcrun simctl shutdown "$booted" >/dev/null 2>&1 || true
+  fi
+done
 xcrun simctl bootstatus "$UDID" -b >/dev/null
-open -a Simulator
+open -a Simulator --args -CurrentDeviceUDID "$UDID"
 
 # 3) ビルド
 echo "▸ ビルド中 ($SIM_NAME)…"
@@ -38,4 +44,16 @@ APP="$BUILD_DIR/CarInspectorAI.app"
 
 xcrun simctl install "$UDID" "$APP"
 xcrun simctl launch --terminate-running-process "$UDID" "$BUNDLE_ID" "$@" >/dev/null
-echo "✅ CarInspectorAI を起動しました ($SIM_NAME)"
+
+# Simulator ウィンドウを前面へ
+osascript -e 'tell application "Simulator" to activate' >/dev/null 2>&1 || true
+
+# 起動確認（プロセスが立ち上がっているかを検証）
+sleep 2
+RUNNING=$(xcrun simctl spawn "$UDID" launchctl list 2>/dev/null || true)
+if echo "$RUNNING" | grep -q "$BUNDLE_ID"; then
+  echo "✅ CarInspectorAI を起動しました ($SIM_NAME)。Simulator のウィンドウをご確認ください。"
+else
+  echo "⚠️ 起動を確認できませんでした。もう一度 ./run.sh を実行してください。" >&2
+  exit 1
+fi
