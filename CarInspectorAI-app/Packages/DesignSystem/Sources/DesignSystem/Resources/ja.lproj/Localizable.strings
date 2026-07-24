@@ -1,0 +1,14 @@
+"badge.confidence %lld" = "信頼度 %lld%%";
+"badge.confidence.a11y %lld" = "AI信頼度 %lld パーセント";
+"status.draft" = "下書き";
+"status.aiRunning" = "AI解析中";
+"status.aiCompleted" = "AI査定済";
+"status.confirmed" = "確定";
+"status.won" = "成約";
+"status.lost" = "失注";
+"status.expired" = "期限切れ";
+"adjustment.plus" = "加点";
+"adjustment.minus" = "減点";
+"adjustment.evidence.a11y" = "根拠画像を表示";
+"offline.banner" = "オフラインです。操作は保存され、通信回復後に同期します。";
+"offline.banner.queued %lld" = "オフラインです。%lld件が同期待ちです。";

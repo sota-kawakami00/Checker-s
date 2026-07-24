@@ -1,0 +1,92 @@
+# CarInspectorAI — xcodegen project definition
+# 生成: `xcodegen generate` / ビルド: AGENTS.md 参照
+name: CarInspectorAI
+options:
+  bundleIdPrefix: com.animetourism
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+  developmentLanguage: ja
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+    CODE_SIGNING_ALLOWED: "NO"
+    CODE_SIGN_IDENTITY: ""
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+
+packages:
+  Core:
+    path: Packages/Core
+  DesignSystem:
+    path: Packages/DesignSystem
+  CameraKit:
+    path: Packages/CameraKit
+  AppraisalKit:
+    path: Packages/AppraisalKit
+  SyncKit:
+    path: Packages/SyncKit
+
+targets:
+  CarInspectorAI:
+    type: application
+    platform: iOS
+    sources:
+      - CarInspectorAI
+    dependencies:
+      - package: Core
+      - package: DesignSystem
+      - package: CameraKit
+      - package: AppraisalKit
+      - package: SyncKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.animetourism.carinspector
+        GENERATE_INFOPLIST_FILE: "YES"
+        INFOPLIST_KEY_NSCameraUsageDescription: 車両の査定写真を撮影するためにカメラを使用します。
+        INFOPLIST_KEY_NSFaceIDUsageDescription: 査定データを保護するためにFace IDを使用します。
+        INFOPLIST_KEY_UILaunchScreen_Generation: "YES"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
+        INFOPLIST_KEY_CFBundleDisplayName: CarInspectorAI
+        SWIFT_EMIT_LOC_STRINGS: "YES"
+        CURRENT_PROJECT_VERSION: "1"
+        MARKETING_VERSION: "1.0"
+
+  CarInspectorAITests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - CarInspectorAITests
+    dependencies:
+      - target: CarInspectorAI
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.animetourism.carinspector.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+
+  CarInspectorAIUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - CarInspectorAIUITests
+    dependencies:
+      - target: CarInspectorAI
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.animetourism.carinspector.uitests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TEST_TARGET_NAME: CarInspectorAI
+
+schemes:
+  CarInspectorAI:
+    build:
+      targets:
+        CarInspectorAI: all
+    test:
+      gatherCoverageData: true
+      targets:
+        - CarInspectorAITests
+        - CarInspectorAIUITests

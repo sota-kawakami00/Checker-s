@@ -1,0 +1,14 @@
+"error.offline" = "オフラインです。査定データは保存されています。通信回復後に自動で同期します。";
+"error.timeout" = "通信がタイムアウトしました。査定データは保存されています。";
+"error.server" = "通信に失敗しました。査定データは保存されています。";
+"error.aiInvalidResponse" = "解析結果に問題がありました。もう一度お試しください。";
+"error.aiLowConfidence" = "AIの信頼度が低いため確認が必要です。";
+"error.aiQuotaExceeded" = "本日の解析上限に達しました。店長にご相談ください。";
+"error.cameraPermissionDenied" = "カメラへのアクセスが許可されていません。設定アプリから許可してください。";
+"error.photoQualityCheckFailed" = "写真の品質判定ができませんでした。";
+"error.notFound" = "データが見つかりませんでした。";
+"error.conflict" = "ほかの端末の変更と競合しました。最新のデータを表示しています。";
+"error.storageFull" = "端末の空き容量が不足しています。設定からキャッシュを削除してください。";
+"error.unauthenticated" = "ログインが必要です。";
+"error.forbidden" = "この操作を行う権限がありません。";
+"error.validation" = "入力内容をご確認ください。";

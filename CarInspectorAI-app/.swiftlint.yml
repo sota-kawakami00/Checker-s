@@ -1,0 +1,32 @@
+# AGENTS.md 準拠 SwiftLint 設定
+included:
+  - CarInspectorAI
+  - Packages
+excluded:
+  - "**/.build"
+  - "**/DerivedData"
+  - functions
+
+opt_in_rules:
+  - force_unwrapping          # CLAUDE.md §2.3: 強制アンラップ禁止
+  - empty_count
+  - closure_spacing
+  - explicit_init
+
+disabled_rules:
+  - todo
+
+force_unwrapping:
+  severity: error
+
+line_length:
+  warning: 140
+  error: 200
+
+file_length:
+  warning: 400   # AGENTS.md: 1ファイル400行超で分割検討
+  error: 700
+
+identifier_name:
+  min_length: 2
+  max_length: 60

@@ -1,0 +1,24 @@
+# Xcode
+*.xcodeproj
+xcuserdata/
+DerivedData/
+build/
+*.xcresult
+
+# SwiftPM
+.build/
+.swiftpm/
+
+# 秘密情報（AGENTS.md: APIキー非ハードコード）
+Config/Config.xcconfig
+GoogleService-Info.plist
+.env
+.env.*
+
+# functions
+functions/node_modules/
+functions/lib/
+functions/coverage/
+
+# OS
+.DS_Store

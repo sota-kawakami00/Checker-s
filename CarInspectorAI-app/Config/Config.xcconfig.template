@@ -1,0 +1,7 @@
+// Config.xcconfig.template
+// コピーして Config.xcconfig を作成（gitignore対象。AGENTS.md: 秘密情報の非ハードコード）
+// クライアントには Gemini/相場 API キーを置かない（07_SECURITY.md）。
+// Firebase 設定は GoogleService-Info.plist を CI で注入する。
+
+// 例: 環境識別子
+CI_ENVIRONMENT = dev
