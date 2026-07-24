@@ -1,0 +1,15 @@
+"quality.focus.message" = "ピントが合っていません。";
+"quality.focus.suggestion" = "ピントが合っていません。もう一度撮影してください。";
+"quality.brightness.dark.message" = "暗すぎます。";
+"quality.brightness.dark.suggestion" = "暗すぎます。明るい場所で撮影してください。";
+"quality.brightness.bright.message" = "明るすぎます。";
+"quality.brightness.bright.suggestion" = "白飛びしています。直射日光を避けて撮影してください。";
+"quality.framing.clipped.message" = "車両が枠から切れています。";
+"quality.framing.clipped.suggestion" = "少し下がって、車両全体が枠に入るように撮影してください。";
+"quality.framing.small.message" = "車両が小さく写っています。";
+"quality.framing.small.suggestion" = "車両に近づいて、ガイド枠に合わせて撮影してください。";
+"quality.tilt.message" = "端末が傾いています。";
+"quality.tilt.suggestion" = "端末を水平にして撮影してください。";
+"quality.timeout.message" = "品質判定をスキップしました。";
+"quality.timeout.suggestion" = "あとで写真一覧から確認してください。";
+"quality.check.ok" = "きれいに撮影できました。";
