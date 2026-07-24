@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://carinspector.ai/schemas/appraisal_request.schema.json",
+  "title": "AppraisalRequest",
+  "description": "Cloud Functions runAppraisal が Gemini プロンプトへ展開する入力。クライアントは Firestore/Storage 経由でこれらを供給する。",
+  "type": "object",
+  "required": ["appraisalId", "requestId", "vehicle", "photos", "checkItems"],
+  "additionalProperties": false,
+  "properties": {
+    "appraisalId": { "type": "string" },
+    "requestId": { "type": "string", "description": "冪等性キー" },
+    "repairConfirmed": { "type": ["boolean", "null"], "description": "人間確定の修復歴。null=未確定" },
+    "vehicle": {
+      "type": "object",
+      "required": ["makerCode", "modelCode", "mileageKm", "colorCode"],
+      "additionalProperties": false,
+      "properties": {
+        "vinMasked": { "type": ["string", "null"], "description": "下6桁マスク済VIN" },
+        "makerCode": { "type": "string" },
+        "modelCode": { "type": "string" },
+        "gradeCode": { "type": ["string", "null"] },
+        "modelYear": { "type": ["integer", "null"] },
+        "firstRegistrationYM": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}$" },
+        "mileageKm": { "type": "integer", "minimum": 0, "maximum": 999999 },
+        "colorCode": { "type": "string" },
+        "inspectionExpiry": { "type": ["string", "null"], "format": "date" },
+        "equipments": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "photos": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": ["photoId", "angle", "storagePath"],
+        "additionalProperties": false,
+        "properties": {
+          "photoId": { "type": "string" },
+          "angle": {
+            "type": "string",
+            "enum": ["front", "rear", "left", "right", "frontLeft", "frontRight", "rearLeft", "rearRight", "interiorFront", "interiorRear", "meter", "engineRoom", "damage"]
+          },
+          "damageTag": { "type": ["string", "null"] },
+          "memo": { "type": ["string", "null"], "maxLength": 200 },
+          "storagePath": { "type": "string" }
+        }
+      }
+    },
+    "market": {
+      "type": ["object", "null"],
+      "description": "fetchMarketPrice の正規化結果。取得不能時 null",
+      "required": ["average", "median", "sampleCount", "range", "trend30d", "fetchedAt", "stale"],
+      "additionalProperties": false,
+      "properties": {
+        "average": { "type": "integer" },
+        "median": { "type": "integer" },
+        "sampleCount": { "type": "integer" },
+        "range": {
+          "type": "object",
+          "required": ["p25", "p75"],
+          "properties": { "p25": { "type": "integer" }, "p75": { "type": "integer" } },
+          "additionalProperties": false
+        },
+        "trend30d": { "type": "number", "description": "30日変化率。-0.02 = 2%下落" },
+        "fetchedAt": { "type": "string", "format": "date-time" },
+        "stale": { "type": "boolean" }
+      }
+    },
+    "store": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "targetMarginRate": { "type": ["number", "null"] }
+      }
+    },
+    "checkItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "label", "weight"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string" },
+          "label": { "type": "string" },
+          "weight": { "type": "number", "minimum": 0 }
+        }
+      }
+    }
+  }
+}
