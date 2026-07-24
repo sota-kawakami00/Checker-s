@@ -1,0 +1,161 @@
+{
+  "makers": [
+    { "code": "toyota", "name": "トヨタ", "sort": 1 },
+    { "code": "nissan", "name": "日産", "sort": 2 },
+    { "code": "honda", "name": "ホンダ", "sort": 3 },
+    { "code": "mazda", "name": "マツダ", "sort": 4 },
+    { "code": "subaru", "name": "スバル", "sort": 5 },
+    { "code": "suzuki", "name": "スズキ", "sort": 6 },
+    { "code": "daihatsu", "name": "ダイハツ", "sort": 7 },
+    { "code": "mitsubishi", "name": "三菱", "sort": 8 },
+    { "code": "lexus", "name": "レクサス", "sort": 9 }
+  ],
+  "models": [
+    {
+      "code": "voxy", "makerCode": "toyota", "name": "ヴォクシー",
+      "years": [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "voxy_s_g", "name": "S-G", "type": "hybrid" },
+        { "code": "voxy_s_z", "name": "S-Z", "type": "hybrid" },
+        { "code": "voxy_zs", "name": "ZS 煌", "type": "gas" }
+      ]
+    },
+    {
+      "code": "prius", "makerCode": "toyota", "name": "プリウス",
+      "years": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "prius_g", "name": "G", "type": "hybrid" },
+        { "code": "prius_z", "name": "Z", "type": "hybrid" }
+      ]
+    },
+    {
+      "code": "alphard", "makerCode": "toyota", "name": "アルファード",
+      "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "alphard_x", "name": "X", "type": "gas" },
+        { "code": "alphard_exec", "name": "Executive Lounge", "type": "hybrid" }
+      ]
+    },
+    {
+      "code": "yaris", "makerCode": "toyota", "name": "ヤリス",
+      "years": [2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "yaris_x", "name": "X", "type": "gas" },
+        { "code": "yaris_hybrid_z", "name": "HYBRID Z", "type": "hybrid" }
+      ]
+    },
+    {
+      "code": "serena", "makerCode": "nissan", "name": "セレナ",
+      "years": [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "serena_xv", "name": "XV", "type": "gas" },
+        { "code": "serena_epower", "name": "e-POWER ハイウェイスターV", "type": "hybrid" }
+      ]
+    },
+    {
+      "code": "note", "makerCode": "nissan", "name": "ノート",
+      "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "note_x", "name": "X", "type": "hybrid" },
+        { "code": "note_aura", "name": "AURA G", "type": "hybrid" }
+      ]
+    },
+    {
+      "code": "nbox", "makerCode": "honda", "name": "N-BOX",
+      "years": [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "nbox_g", "name": "G", "type": "gas" },
+        { "code": "nbox_custom", "name": "カスタム ターボ", "type": "gas" }
+      ]
+    },
+    {
+      "code": "freed", "makerCode": "honda", "name": "フリード",
+      "years": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "freed_g", "name": "G", "type": "gas" },
+        { "code": "freed_ehev", "name": "e:HEV AIR", "type": "hybrid" }
+      ]
+    },
+    {
+      "code": "cx5", "makerCode": "mazda", "name": "CX-5",
+      "years": [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "cx5_20s", "name": "20S PROACTIVE", "type": "gas" },
+        { "code": "cx5_xd", "name": "XD Exclusive Mode", "type": "diesel" }
+      ]
+    },
+    {
+      "code": "forester", "makerCode": "subaru", "name": "フォレスター",
+      "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "forester_touring", "name": "Touring", "type": "gas" },
+        { "code": "forester_sti", "name": "STI Sport", "type": "hybrid" }
+      ]
+    },
+    {
+      "code": "jimny", "makerCode": "suzuki", "name": "ジムニー",
+      "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "jimny_xc", "name": "XC", "type": "gas" },
+        { "code": "jimny_xl", "name": "XL", "type": "gas" }
+      ]
+    },
+    {
+      "code": "tanto", "makerCode": "daihatsu", "name": "タント",
+      "years": [2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "tanto_x", "name": "X", "type": "gas" },
+        { "code": "tanto_custom_rs", "name": "カスタムRS", "type": "gas" }
+      ]
+    },
+    {
+      "code": "delica", "makerCode": "mitsubishi", "name": "デリカD:5",
+      "years": [2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "delica_g", "name": "G", "type": "diesel" },
+        { "code": "delica_p", "name": "P", "type": "diesel" }
+      ]
+    },
+    {
+      "code": "rx", "makerCode": "lexus", "name": "RX",
+      "years": [2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "grades": [
+        { "code": "rx350h", "name": "RX350h version L", "type": "hybrid" },
+        { "code": "rx500h", "name": "RX500h F SPORT Performance", "type": "hybrid" }
+      ]
+    }
+  ],
+  "equipments": [
+    { "code": "navi", "label": "純正ナビ", "sort": 1 },
+    { "code": "etc", "label": "ETC", "sort": 2 },
+    { "code": "sunroof", "label": "サンルーフ", "sort": 3 },
+    { "code": "leatherSeat", "label": "革シート", "sort": 4 },
+    { "code": "safetyPkg", "label": "衝突被害軽減ブレーキ", "sort": 5 },
+    { "code": "powerSlideDoor", "label": "両側電動スライドドア", "sort": 6 },
+    { "code": "driveRecorder", "label": "ドライブレコーダー", "sort": 7 },
+    { "code": "awd", "label": "4WD", "sort": 8 },
+    { "code": "backCamera", "label": "バックカメラ", "sort": 9 },
+    { "code": "ledHeadlight", "label": "LEDヘッドライト", "sort": 10 }
+  ],
+  "checkItems": [
+    { "code": "spareKey", "label": "スペアキー", "weight": 1.0, "hint": "お客様にスペアキーの有無をご確認ください。", "sort": 1 },
+    { "code": "maintenanceBook", "label": "整備手帳", "weight": 1.0, "hint": "グローブボックス内をご確認ください。", "sort": 2 },
+    { "code": "underbody", "label": "下回り", "weight": 2.0, "hint": "リフトアップまたはミラーで下回りをご確認ください。", "sort": 3 },
+    { "code": "engineStart", "label": "エンジン始動", "weight": 2.0, "hint": "エンジンをかけ、異音・警告灯をご確認ください。", "sort": 4 },
+    { "code": "airCondition", "label": "エアコン動作", "weight": 1.5, "hint": "冷房・暖房の効きをご確認ください。", "sort": 5 },
+    { "code": "naviOperation", "label": "ナビ動作", "weight": 1.0, "hint": "ナビの起動と操作をご確認ください。", "sort": 6 },
+    { "code": "tires4", "label": "タイヤ4本", "weight": 1.5, "hint": "4本すべての残溝と製造年をご確認ください。", "sort": 7 },
+    { "code": "jackTools", "label": "ジャッキ・工具", "weight": 0.5, "hint": "ラゲッジ下の収納をご確認ください。", "sort": 8 }
+  ],
+  "colors": [
+    { "code": "pearlWhite", "label": "パールホワイト", "popular": true },
+    { "code": "black", "label": "ブラック", "popular": true },
+    { "code": "silver", "label": "シルバー", "popular": false },
+    { "code": "gray", "label": "グレー", "popular": false },
+    { "code": "red", "label": "レッド", "popular": false },
+    { "code": "blue", "label": "ブルー", "popular": false },
+    { "code": "green", "label": "グリーン", "popular": false },
+    { "code": "brown", "label": "ブラウン", "popular": false },
+    { "code": "other", "label": "その他", "popular": false }
+  ]
+}
