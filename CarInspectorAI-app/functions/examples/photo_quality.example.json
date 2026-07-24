@@ -1,0 +1,19 @@
+{
+  "photoId": "ph_front_001",
+  "source": "onDevice",
+  "passed": false,
+  "issues": [
+    {
+      "code": "framing",
+      "message": "ボンネットが切れています。",
+      "suggestion": "少し下がって、車両全体が枠に入るように撮影してください。",
+      "blocking": false
+    }
+  ],
+  "metrics": {
+    "laplacianVariance": 412.7,
+    "brightnessMedian": 128,
+    "tiltDegrees": 1.8,
+    "vehicleBBox": { "x": 0.05, "y": 0.12, "w": 0.93, "h": 0.86 }
+  }
+}

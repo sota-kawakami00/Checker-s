@@ -1,0 +1,64 @@
+{
+  "appraisedPrice": 1820000,
+  "tradeInReference": 1900000,
+  "basePrice": 1810000,
+  "adjustments": [
+    {
+      "code": "popularColor",
+      "label": "人気カラー（パールホワイト）",
+      "amount": 50000,
+      "rationale": "同型式の流通ではパールホワイトの成約価格が平均を上回る傾向があります。",
+      "evidencePhotoIds": ["ph_front_001"]
+    },
+    {
+      "code": "nonSmoking",
+      "label": "禁煙車",
+      "amount": 30000,
+      "rationale": "内装画像に喫煙痕・ヤニ汚れが見当たらず、禁煙車として評価できる可能性が高いです。",
+      "evidencePhotoIds": ["ph_intf_009", "ph_intr_010"]
+    },
+    {
+      "code": "panelRepair",
+      "label": "左前ドア板金跡",
+      "amount": -40000,
+      "rationale": "左前ドア下部に再塗装によるわずかな色調差が見られ、板金修理の可能性があります。",
+      "evidencePhotoIds": ["ph_left_003", "ph_dmg_013"]
+    },
+    {
+      "code": "tireWear",
+      "label": "タイヤ摩耗",
+      "amount": -20000,
+      "rationale": "前輪の残溝が浅く、近い時期の交換が想定されます。",
+      "evidencePhotoIds": ["ph_fl_005"]
+    },
+    {
+      "code": "marketDecline",
+      "label": "市場相場の下落傾向",
+      "amount": -10000,
+      "rationale": "直近30日で同条件帯の相場が約1%下落しています。",
+      "evidencePhotoIds": []
+    }
+  ],
+  "marketAveragePrice": 1810000,
+  "confidence": 0.94,
+  "needsReview": false,
+  "repairFinding": {
+    "probability": 0.22,
+    "evidences": [
+      {
+        "photoId": "ph_left_003",
+        "type": "colorMismatch",
+        "region": { "x": 0.18, "y": 0.55, "w": 0.22, "h": 0.2 },
+        "note": "左前ドアとフェンダーの色調にわずかな差が見られます。再塗装の可能性があります。"
+      }
+    ]
+  },
+  "completeness": {
+    "score": 0.98,
+    "uncheckedItems": [
+      { "code": "spareKey", "label": "スペアキー", "hint": "お客様にスペアキーの有無をご確認ください。" },
+      { "code": "maintenanceBook", "label": "整備手帳", "hint": "グローブボックス内をご確認ください。" },
+      { "code": "underbody", "label": "下回り", "hint": "リフトアップまたはミラーで下回りをご確認ください。" }
+    ]
+  }
+}

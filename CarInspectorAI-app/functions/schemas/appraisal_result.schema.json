@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://carinspector.ai/schemas/appraisal_result.schema.json",
+  "title": "AppraisalResult",
+  "description": "Gemini メイン査定の出力契約。CF検証(05 §3.3)後 appraisals/{id}.aiResult へ保存。",
+  "type": "object",
+  "required": ["appraisedPrice", "tradeInReference", "basePrice", "adjustments", "marketAveragePrice", "confidence", "repairFinding", "completeness"],
+  "additionalProperties": false,
+  "properties": {
+    "appraisedPrice": { "type": "integer", "multipleOf": 10000, "minimum": 0, "description": "査定価格（円・1万円単位 BR-01）" },
+    "tradeInReference": { "type": "integer", "minimum": 0, "description": "下取参考価格（円）" },
+    "basePrice": { "type": "integer", "minimum": 0, "description": "相場基準価格（円）" },
+    "adjustments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "label", "amount", "rationale", "evidencePhotoIds"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string", "description": "加減点項目コード（例 popularColor, nonSmoking, panelRepair, tireWear, marketDecline）" },
+          "label": { "type": "string", "description": "表示名（日本語）" },
+          "amount": { "type": "integer", "description": "円。加点は正、減点は負" },
+          "rationale": { "type": "string", "maxLength": 200 },
+          "evidencePhotoIds": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "marketAveragePrice": { "type": "integer", "minimum": 0 },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "needsReview": { "type": "boolean", "description": "CF付与: 相場乖離大等（05 §3.3-4）。Gemini出力時は省略可", "default": false },
+    "repairFinding": {
+      "type": "object",
+      "required": ["probability", "evidences"],
+      "additionalProperties": false,
+      "properties": {
+        "probability": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["photoId", "type", "region", "note"],
+            "additionalProperties": false,
+            "properties": {
+              "photoId": { "type": "string" },
+              "type": { "type": "string", "enum": ["toolMarks", "colorMismatch", "panelGap", "weldSpots", "sealant"] },
+              "region": {
+                "type": "object",
+                "required": ["x", "y", "w", "h"],
+                "additionalProperties": false,
+                "properties": {
+                  "x": { "type": "number", "minimum": 0, "maximum": 1 },
+                  "y": { "type": "number", "minimum": 0, "maximum": 1 },
+                  "w": { "type": "number", "minimum": 0, "maximum": 1 },
+                  "h": { "type": "number", "minimum": 0, "maximum": 1 }
+                }
+              },
+              "note": { "type": "string", "maxLength": 200 }
+            }
+          }
+        }
+      }
+    },
+    "completeness": {
+      "type": "object",
+      "required": ["score", "uncheckedItems"],
+      "additionalProperties": false,
+      "properties": {
+        "score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "uncheckedItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["code", "label", "hint"],
+            "additionalProperties": false,
+            "properties": {
+              "code": { "type": "string" },
+              "label": { "type": "string" },
+              "hint": { "type": "string", "maxLength": 100 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://carinspector.ai/schemas/auction_comparison.schema.json",
+  "title": "AuctionComparisonResult",
+  "description": "Phase 2: 出品票OCR比較の出力契約。",
+  "type": "object",
+  "required": ["sheet", "diffs", "summary"],
+  "additionalProperties": false,
+  "properties": {
+    "sheet": {
+      "type": "object",
+      "required": ["overallGrade", "exteriorGrade", "interiorGrade", "marks"],
+      "additionalProperties": false,
+      "properties": {
+        "overallGrade": { "type": ["string", "null"], "description": "総合評価点（例 4, 3.5, R）" },
+        "exteriorGrade": { "type": ["string", "null"] },
+        "interiorGrade": { "type": ["string", "null"] },
+        "marks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["partCode", "symbol", "unreadable"],
+            "additionalProperties": false,
+            "properties": {
+              "partCode": {
+                "type": "string",
+                "enum": ["frontBumper", "rearBumper", "hood", "roof", "trunk", "leftFrontFender", "rightFrontFender", "leftRearFender", "rightRearFender", "leftFrontDoor", "rightFrontDoor", "leftRearDoor", "rightRearDoor", "leftSideStep", "rightSideStep", "windshield", "other"]
+              },
+              "symbol": { "type": ["string", "null"], "description": "A2, U3, X, W 等" },
+              "unreadable": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "diffs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["partCode", "kind", "sheetSymbol", "currentFinding", "message"],
+        "additionalProperties": false,
+        "properties": {
+          "partCode": { "type": "string" },
+          "kind": { "type": "string", "enum": ["worse", "new", "improved", "same"] },
+          "sheetSymbol": { "type": ["string", "null"] },
+          "currentFinding": { "type": ["string", "null"] },
+          "message": { "type": "string", "maxLength": 200 }
+        }
+      }
+    },
+    "summary": { "type": "string", "maxLength": 300 }
+  }
+}

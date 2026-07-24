@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://carinspector.ai/schemas/repair_history.schema.json",
+  "title": "RepairHistoryResult",
+  "description": "修復歴単体解析(prompts/repair_history)の出力。メイン査定内のrepairFindingと同構造+limitations。",
+  "type": "object",
+  "required": ["probability", "evidences", "limitations"],
+  "additionalProperties": false,
+  "properties": {
+    "probability": { "type": "number", "minimum": 0, "maximum": 1 },
+    "evidences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["photoId", "type", "region", "note"],
+        "additionalProperties": false,
+        "properties": {
+          "photoId": { "type": "string" },
+          "type": { "type": "string", "enum": ["toolMarks", "colorMismatch", "panelGap", "weldSpots", "sealant"] },
+          "region": {
+            "type": "object",
+            "required": ["x", "y", "w", "h"],
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "number", "minimum": 0, "maximum": 1 },
+              "y": { "type": "number", "minimum": 0, "maximum": 1 },
+              "w": { "type": "number", "minimum": 0, "maximum": 1 },
+              "h": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          },
+          "note": { "type": "string", "maxLength": 200 }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "description": "画像から判定不能な部位と現車確認の促し",
+      "items": {
+        "type": "object",
+        "required": ["area", "message"],
+        "additionalProperties": false,
+        "properties": {
+          "area": { "type": "string" },
+          "message": { "type": "string", "maxLength": 150 }
+        }
+      }
+    }
+  }
+}

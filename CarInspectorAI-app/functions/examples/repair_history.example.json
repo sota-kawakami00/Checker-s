@@ -1,0 +1,23 @@
+{
+  "probability": 0.78,
+  "evidences": [
+    {
+      "photoId": "ph_engine_01",
+      "type": "toolMarks",
+      "region": { "x": 0.12, "y": 0.34, "w": 0.18, "h": 0.12 },
+      "note": "右フェンダー取付ボルトに工具を掛けた痕の可能性があります。"
+    },
+    {
+      "photoId": "ph_front_right_01",
+      "type": "panelGap",
+      "region": { "x": 0.48, "y": 0.3, "w": 0.1, "h": 0.4 },
+      "note": "右フェンダーとボンネットの隙間が左側と比べて不均一です。"
+    }
+  ],
+  "limitations": [
+    {
+      "area": "下回り・骨格部",
+      "message": "画像からはコアサポート下部・フレームを確認できません。現車でのご確認をお願いします。"
+    }
+  ]
+}

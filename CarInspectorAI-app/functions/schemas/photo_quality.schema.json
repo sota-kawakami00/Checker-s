@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://carinspector.ai/schemas/photo_quality.schema.json",
+  "title": "PhotoQualityResult",
+  "description": "写真品質判定の統一結果。端末内一次判定・クラウド二次判定の双方が本形式で出力する。",
+  "type": "object",
+  "required": ["photoId", "source", "passed", "issues"],
+  "additionalProperties": false,
+  "properties": {
+    "photoId": { "type": "string" },
+    "source": { "type": "string", "enum": ["onDevice", "cloud"] },
+    "passed": { "type": "boolean" },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "message", "suggestion", "blocking"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string", "enum": ["focus", "brightness", "framing", "tilt", "angleMatch", "reflection", "obstruction", "coverage", "unjudgeable"] },
+          "message": { "type": "string", "maxLength": 100 },
+          "suggestion": { "type": "string", "maxLength": 100 },
+          "blocking": { "type": "boolean", "description": "true=再撮影必須（focus/brightness）。false=許容可（framing等 SCR-CAMERA §2）" }
+        }
+      }
+    },
+    "metrics": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "laplacianVariance": { "type": ["number", "null"] },
+        "brightnessMedian": { "type": ["number", "null"] },
+        "tiltDegrees": { "type": ["number", "null"] },
+        "vehicleBBox": {
+          "type": ["object", "null"],
+          "required": ["x", "y", "w", "h"],
+          "additionalProperties": false,
+          "properties": {
+            "x": { "type": "number" }, "y": { "type": "number" },
+            "w": { "type": "number" }, "h": { "type": "number" }
+          }
+        }
+      }
+    }
+  }
+}

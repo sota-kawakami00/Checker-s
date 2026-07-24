@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://carinspector.ai/schemas/completeness.schema.json",
+  "title": "CompletenessResult",
+  "description": "査定漏れ診断（単体実行版）。メイン査定内 completeness と同構造。",
+  "type": "object",
+  "required": ["score", "uncheckedItems"],
+  "additionalProperties": false,
+  "properties": {
+    "score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "uncheckedItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "label", "hint"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string" },
+          "label": { "type": "string" },
+          "hint": { "type": "string", "maxLength": 100 }
+        }
+      }
+    }
+  }
+}
