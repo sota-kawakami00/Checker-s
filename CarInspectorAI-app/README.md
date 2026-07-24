@@ -23,6 +23,13 @@ CarInspectorAI-app/
 └── CarInspectorAIUITests/    # UI-01（UC-01完走）XCUITest
 ```
 
+## 実行（ワンコマンド）
+
+```bash
+./run.sh                  # ビルド→シミュレータ起動→インストール→起動（ログイン画面から）
+./run.sh --uitest-signin  # デモスタッフで自動ログインして起動
+```
+
 ## セットアップ・検証コマンド
 
 ```bash
