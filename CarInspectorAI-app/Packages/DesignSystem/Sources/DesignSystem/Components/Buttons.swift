@@ -32,7 +32,7 @@ public struct PrimaryButton: View {
     }
 }
 
-/// 副次ボタン
+/// 副次ボタン（iOS 26+ は Liquid Glass ボタンスタイル）
 public struct SecondaryButton: View {
     private let title: String
     private let isEnabled: Bool
@@ -45,12 +45,19 @@ public struct SecondaryButton: View {
     }
 
     public var body: some View {
+        if #available(iOS 26.0, macOS 26.0, *) {
+            button.buttonStyle(.glass)
+        } else {
+            button.buttonStyle(.bordered)
+        }
+    }
+
+    private var button: some View {
         Button(action: action) {
             Text(title)
                 .font(.headline)
                 .frame(maxWidth: .infinity, minHeight: 50)
         }
-        .buttonStyle(.bordered)
         .buttonBorderShape(.roundedRectangle(radius: CIToken.Radius.button))
         .tint(CIToken.Colors.primary)
         .disabled(!isEnabled)

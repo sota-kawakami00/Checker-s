@@ -286,7 +286,7 @@ struct AppraisalResultView: View {
                             HStack {
                                 Image(systemName: "photo")
                                 VStack(alignment: .leading) {
-                                    Text(LocalizedStringKey("repair.type.\(evidence.type.rawValue)"))
+                                    Text(LocalizedStringKey("repair.type." + evidence.type.rawValue))
                                         .font(CIToken.Fonts.body.bold())
                                     Text(evidence.note)
                                         .font(CIToken.Fonts.caption)
@@ -417,7 +417,7 @@ struct AppraisalResultView: View {
             }
         }
         .padding(CIToken.Space.m)
-        .background(CIToken.Materials.glass)
+        .ciGlassBar()
     }
 }
 

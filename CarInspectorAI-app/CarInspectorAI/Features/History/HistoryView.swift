@@ -111,7 +111,7 @@ struct HistoryView: View {
             .padding(.horizontal, CIToken.Space.m)
             .padding(.vertical, CIToken.Space.s)
         }
-        .background(CIToken.Materials.glass)
+        .ciGlassBar()
     }
 
     private func chipLabel(_ text: String, active: Bool) -> some View {

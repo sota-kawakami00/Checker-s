@@ -71,7 +71,7 @@ struct CameraView: View {
                             .font(CIToken.Fonts.caption.bold())
                             .foregroundStyle(CIToken.Colors.warning)
                             .padding(CIToken.Space.s)
-                            .background(CIToken.Materials.glass, in: Capsule())
+                            .ciGlass(in: Capsule())
                             .transition(.opacity)
                     }
 
@@ -163,7 +163,7 @@ struct CameraView: View {
         }
         .padding(.horizontal, CIToken.Space.m)
         .padding(.vertical, CIToken.Space.s)
-        .background(CIToken.Materials.glass)
+        .ciGlassBar()
     }
 
     private func toast(_ viewModel: CameraViewModel) -> some View {
@@ -239,7 +239,7 @@ struct CameraView: View {
             .padding(.horizontal, CIToken.Space.l)
         }
         .padding(.vertical, CIToken.Space.s)
-        .background(CIToken.Materials.glass)
+        .ciGlassBar()
     }
 
     private func thumbnail(_ angle: PhotoAngle, viewModel: CameraViewModel) -> some View {

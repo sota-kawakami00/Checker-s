@@ -40,7 +40,7 @@ struct SettingsView: View {
                     LabeledContent("settings.profile.name", value: staff.displayName)
                     LabeledContent("settings.profile.email", value: staff.email)
                     LabeledContent("settings.profile.role") {
-                        Text(LocalizedStringKey("role.\(staff.role.rawValue)"))
+                        Text(LocalizedStringKey("role." + staff.role.rawValue))
                     }
                 }
                 Button("settings.profile.resetPassword") {

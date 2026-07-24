@@ -15,10 +15,7 @@ public struct GlassCard<Content: View>: View {
         content
             .padding(CIToken.Space.m)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(
-                strong ? CIToken.Materials.glassStrong : CIToken.Materials.glass,
-                in: RoundedRectangle(cornerRadius: CIToken.Radius.card, style: .continuous)
-            )
+            .ciGlass(strong: strong, in: RoundedRectangle(cornerRadius: CIToken.Radius.card, style: .continuous))
             .shadow(
                 color: .black.opacity(CIToken.Shadow.cardOpacity),
                 radius: CIToken.Shadow.cardBlur,

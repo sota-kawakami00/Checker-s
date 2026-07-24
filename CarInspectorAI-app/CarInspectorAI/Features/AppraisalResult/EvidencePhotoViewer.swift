@@ -84,7 +84,7 @@ struct EvidencePhotoViewer: View {
             Rectangle()
                 .strokeBorder(CIToken.Colors.danger, lineWidth: 2)
                 .frame(width: rect.width, height: rect.height)
-            Text(LocalizedStringKey("repair.type.\(evidence.type.rawValue)"))
+            Text(LocalizedStringKey("repair.type." + evidence.type.rawValue))
                 .font(CIToken.Fonts.caption.bold())
                 .padding(CIToken.Space.xs)
                 .background(CIToken.Colors.danger)

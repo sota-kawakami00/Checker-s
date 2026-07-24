@@ -52,6 +52,18 @@ cd functions && npm install && npm run build && npm test
 デモアカウント: `staff@carinspector.jp` / `manager@carinspector.jp`（パスワード `demo1234`）
 シミュレータではモックカメラ（合成車両画像）で撮影フローが完走します。表示言語は日本語端末を想定しています。
 
+## Liquid Glass 対応（03_UI_UX_GUIDELINE）
+
+iOS 26+ ではシステムの **Liquid Glass API** を使用します（iOS 18〜25 は従来マテリアルへ自動フォールバック）。
+
+- `DesignSystem.ciGlass(strong:in:interactive:)` … `glassEffect` ベースのガラス背景。
+  `strong: true`（ci.glassStrong 相当）は Liquid Glass 上でも価格等の背面に不透明レイヤを敷き、
+  可読性 4.5:1 を確保（03 §1-3「可読性が最優先」）。
+- `ciGlassBar()` … 画面上下バー用。`SecondaryButton` は iOS 26+ で `.buttonStyle(.glass)`。
+- `CIGlassContainer` … 複数ガラス要素の融合（morphing）用コンテナ。
+- `PrimaryButton`（最重要CTA）は設計書の指示どおり primary 塗りのまま（SCREEN_HOME §12「ガラスにしない」）。
+- 検証: iPhone 16 Pro (iOS 18.0) と iPhone 17 Pro (iOS 26.4) の両方で UI-01 が green。
+
 ## テストトレース（08_TEST_PLAN → 実装）
 
 | 設計書テストID | 実装 |

@@ -50,7 +50,7 @@ public struct QualityToast: View {
         }
         .padding(CIToken.Space.m)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(CIToken.Materials.glass, in: RoundedRectangle(cornerRadius: CIToken.Radius.card, style: .continuous))
+        .ciGlass(in: RoundedRectangle(cornerRadius: CIToken.Radius.card, style: .continuous))
         .environment(\.colorScheme, .dark)
         .accessibilityElement(children: .combine)
     }
