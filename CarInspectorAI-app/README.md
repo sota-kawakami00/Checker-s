@@ -78,6 +78,20 @@ iOS 26+ ではシステムの **Liquid Glass API** を使用します（iOS 18�
 | UI-01（UC-01完走: 入力→12枚撮影→AI→確定→PDF） | `CarInspectorAIUITests/UC01FlowUITests` |
 | UC-02（オフライン→復帰→自動実行） | `CarInspectorAITests/HomeAndFlowTests.uc02OfflineFlow` |
 
+## TestFlight 配信
+
+```bash
+./testflight.sh            # アーカイブ + ipa 書き出し（署名: AnimeTourism Inc. 自動署名）
+./testflight.sh --upload   # ASC_KEY_ID / ASC_ISSUER_ID 設定時は自動アップロードまで
+```
+
+- 初回のみ App Store Connect の「マイアプリ > +」で Bundle ID `com.animetourism.carinspector` のアプリを作成
+  （Xcode Organizer からの Distribute なら作成ダイアログが自動で出ます）。
+- 自動アップロードには App Store Connect API キー（キーID / Issuer ID / .p8）が必要。
+  .p8 は `~/.appstoreconnect/private_keys/` に置くと自動検出されます。
+- ビルド番号は実行毎に日時（yyyyMMddHHmm）で自動採番。輸出コンプライアンスは
+  `ITSAppUsesNonExemptEncryption=NO` を設定済みのため質問はスキップされます。
+
 ## Firebase / Gemini 接続について（重要）
 
 本リポジトリには Firebase プロジェクト設定・APIキーを**含めていません**（07_SECURITY: 秘密情報の非ハードコード）。

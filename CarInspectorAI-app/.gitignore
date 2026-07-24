@@ -22,3 +22,5 @@ functions/coverage/
 
 # OS
 .DS_Store
+build/
+private_keys/

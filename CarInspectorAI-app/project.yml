@@ -13,8 +13,8 @@ settings:
     SWIFT_VERSION: "6.0"
     SWIFT_STRICT_CONCURRENCY: complete
     IPHONEOS_DEPLOYMENT_TARGET: "18.0"
-    CODE_SIGNING_ALLOWED: "NO"
-    CODE_SIGN_IDENTITY: ""
+    # シミュレータは署名不要（CI高速化）。実機・アーカイブは自動署名
+    "CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]": "NO"
     ENABLE_USER_SCRIPT_SANDBOXING: "YES"
 
 packages:
@@ -44,6 +44,9 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.animetourism.carinspector
+        DEVELOPMENT_TEAM: DXWDABVY8M
+        CODE_SIGN_STYLE: Automatic
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: "NO"
         GENERATE_INFOPLIST_FILE: "YES"
         INFOPLIST_KEY_NSCameraUsageDescription: 車両の査定写真を撮影するためにカメラを使用します。
         INFOPLIST_KEY_NSFaceIDUsageDescription: 査定データを保護するためにFace IDを使用します。
